@@ -8,10 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://addons/godot-git-plugin/git_api.gdns"
+} ]
+_global_script_class_icons={
+"GitAPI": ""
+}
+
 [application]
 
 config/name="trivialwar"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://player/Area2D.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -26,7 +36,7 @@ window/size/resizable=false
 
 [gdnative]
 
-singletons=[  ]
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
 
 [input]
 
