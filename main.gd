@@ -21,7 +21,7 @@ func _on_MobTimer_timeout():
 	# Create mob
 	var mob = mob_scene.instance()
 	
-	mob.position.x = rand_range(0, GlobalVar.screen_size.y)
+	mob.position.x = rand_range(0, GlobalVar.screen_size.x)
 	
 	# Add mob to scene
 	add_child(mob)

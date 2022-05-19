@@ -42,7 +42,7 @@ func _input(event):
 	if event is InputEventMouseMotion and dragging:
 		position = event.position
 
-func _on_Player_body_entered(body):
+func _on_Player_body_entered(_body):
 	hide()
 	print("Player hit")
 	emit_signal("hit")
