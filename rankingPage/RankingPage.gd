@@ -7,6 +7,9 @@ signal restart_game
 
 
 func _ready():
+	pass
+	
+func show_game_over():
 	show_message("GAME OVER")
 
 func show_message(text):

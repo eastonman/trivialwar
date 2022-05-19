@@ -12,6 +12,7 @@ func new_game():
 	$MobTimer.start()
 	
 func game_over():
+	$RankingPage/restartButton.visible = true
 	$MobTimer.stop()
 
 
