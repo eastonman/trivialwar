@@ -22,7 +22,11 @@ scale = Vector2( 0.982465, 0.981797 )
 
 [node name="RankingPage" parent="." instance=ExtResource( 5 )]
 
+[node name="PlayerStartPosition" type="Position2D" parent="."]
+position = Vector2( 549, 1398 )
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="hit" from="Player" to="RankingPage" method="show_game_over"]
 [connection signal="start_game" from="FirstPage" to="." method="new_game"]
+[connection signal="restart_game" from="RankingPage" to="." method="new_game"]

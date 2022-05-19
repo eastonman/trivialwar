@@ -8,7 +8,7 @@ func _ready():
 
 func new_game():
 	# Show palyer
-	$Player.visible = true
+	$Player.start($PlayerStartPosition.position)
 	$MobTimer.start()
 	
 func game_over():
