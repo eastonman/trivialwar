@@ -23,6 +23,7 @@ GlobalVar="*res://GlobalVar.tscn"
 window/size/width=480
 window/size/height=720
 window/size/resizable=false
+window/handheld/orientation="portrait"
 
 [gdnative]
 
