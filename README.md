@@ -1,5 +1,5 @@
 # trivialwar
-###代做清单：
+### 代做清单：
 
 `* `BOSS机  
 `* `bullet，飞机发射子弹  
