@@ -4,10 +4,11 @@ export(PackedScene) var mob_scene
 
 func _ready():
 	randomize()
-	# Debug tesing purpose
-	new_game()
+	
 
 func new_game():
+	# Show palyer
+	$Player.visible = true
 	$MobTimer.start()
 	
 func game_over():
@@ -19,7 +20,7 @@ func _on_MobTimer_timeout():
 	# Create mob
 	var mob = mob_scene.instance()
 	
-	mob.position.x = rand_range(0, GlobalVar.screen_size.x)
+	mob.position.x = rand_range(0, GlobalVar.screen_size.y)
 	
 	# Add mob to scene
 	add_child(mob)
