@@ -16,3 +16,5 @@ texture = ExtResource( 1 )
 position = Vector2( -0.499999, 0.500004 )
 scale = Vector2( 1.02539, 1 )
 polygon = PoolVector2Array( -32, -32, -31, 32, 31, 31, 32, -33 )
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
