@@ -9,7 +9,7 @@ signal restart_game
 func _ready():
 	pass
 	
-func show_game_over():
+func game_over_entrypoint():
 	show_message("GAME OVER")
 
 func show_message(text):
@@ -22,6 +22,8 @@ func show_message(text):
 func _on_MessageTimer_timeout():
 	$Message.hide()
 
+# MessageTimer is set to oneshot
+# means do not need to stop after timeout
 func _on_restartButton_pressed():
 	$restartButton.hide()
 	emit_signal("restart_game")

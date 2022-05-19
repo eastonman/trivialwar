@@ -48,6 +48,7 @@ shortcut = SubResource( 4 )
 text = "RESTART"
 
 [node name="MessageTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="pressed" from="restartButton" to="." method="_on_restartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
