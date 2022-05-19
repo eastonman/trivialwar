@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-
-var speed = 500
+var HP = 100
+var speed = 600
 
 func _process(delta):
 	var velocity = Vector2.DOWN * speed
