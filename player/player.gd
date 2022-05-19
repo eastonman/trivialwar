@@ -1,4 +1,5 @@
 extends Area2D
+signal hit
 export var speed = 480
 var screen_size
 # Declare member variables here. Examples:
@@ -23,4 +24,30 @@ func _process(delta):
 	
 	if velocity.length() > 0 :
 		velocity = velocity.normalized()*speed
+	
+	position += velocity * delta
+	position.x = clamp(position.x, 0 , screen_size.x)
+	position.y = clamp(position.y, 0 , screen_size.y)
 
+var dragging = false
+func _input(event):
+	
+	if event is InputEventMouseButton  and event.button_index == BUTTON_LEFT :
+		if (event.position.x<position.x+50&&event.position.x>position.x-50)&&(event.position.y<position.y+50 && event.position.y>position.y-50):
+			position=event.position
+			if not dragging and event.is_pressed():
+				dragging = true
+		if dragging and not event.is_pressed():
+			dragging = false
+	if event is InputEventMouseMotion and dragging:
+		position = event.position
+
+func _on_Player_body_entered(body):
+	hide()
+	emit_signal("hit")
+	$CollisionPolygon2D.set_deferred("disabled", true)
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionPolygon2D.disabled = false
