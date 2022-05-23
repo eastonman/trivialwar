@@ -2,6 +2,8 @@ extends Area2D
 signal hit
 export var speed = 480
 var screen_size
+var player_height
+var player_width
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -10,6 +12,8 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	player_height=$Sprite.texture.get_height()
+	player_width=$Sprite.texture.get_width()
 
 func _process(delta):
 	var velocity = Vector2.ZERO
@@ -33,7 +37,7 @@ var dragging = false
 func _input(event):
 	
 	if event is InputEventMouseButton  and event.button_index == BUTTON_LEFT :
-		if (event.position.x<position.x+50&&event.position.x>position.x-50)&&(event.position.y<position.y+50 && event.position.y>position.y-50):
+		if (event.position.x<position.x+0.75*player_width&&event.position.x>position.x-0.75*player_width)&&(event.position.y<position.y+0.75*player_height && event.position.y>position.y-0.75*player_height):
 			position=event.position
 			if not dragging and event.is_pressed():
 				dragging = true
