@@ -25,8 +25,12 @@ scale = Vector2( 0.982465, 0.981797 )
 [node name="PlayerStartPosition" type="Position2D" parent="."]
 position = Vector2( 549, 1398 )
 
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="hit" from="Player" to="RankingPage" method="game_over_entrypoint"]
 [connection signal="start_game" from="FirstPage" to="." method="new_game"]
 [connection signal="restart_game" from="RankingPage" to="." method="new_game"]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]

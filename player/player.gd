@@ -56,3 +56,13 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionPolygon2D.disabled = false
+
+var bullet_scene = preload("res://bullet/player_bullet.tscn") 
+func shoot():
+	var bullet = bullet_scene.instance()
+	bullet.position.x = position.x
+	bullet.position.y = position.y
+	bullet.speed = -1000
+	# Add bullet
+	return bullet
+	

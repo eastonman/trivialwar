@@ -10,10 +10,14 @@ func new_game():
 	# Show palyer
 	$Player.start($PlayerStartPosition.position)
 	$MobTimer.start()
+	$BulletTimer.start()
+	get_tree().call_group("player_bullets","queue_free")
+	get_tree().call_group("mobs","queue_free")
 	
 func game_over():
 	$RankingPage/restartButton.visible = true
 	$MobTimer.stop()
+	$BulletTimer.stop()
 
 # Load elite scene for later instance
 var elite_scene = preload("res://enemy/Elite.tscn")
@@ -32,3 +36,9 @@ func _on_MobTimer_timeout():
 		
 		# Add mob to scene
 		add_child(mob)
+
+
+func _on_BulletTimer_timeout():
+	var bullet = $Player.shoot()
+	add_child(bullet)
+	
