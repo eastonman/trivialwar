@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://enemy/Mob.tscn" type="PackedScene" id=1]
 [ext_resource path="res://enemy/Boss.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://materialBundle/bundle1/ep_15.png" type="Texture" id=4]
+[ext_resource path="res://music/bgm_boss.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -25,5 +26,9 @@ margin_bottom = 34.0
 custom_fonts/font = SubResource( 1 )
 text = "Boss"
 align = 1
+
+[node name="BossBgmMusic" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 5 )
+autoplay = true
 
 [connection signal="body_entered" from="." to="." method="_on_Boss_body_entered"]

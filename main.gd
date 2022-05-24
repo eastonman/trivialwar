@@ -10,7 +10,7 @@ func _process(delta):
 	$ScoreLabel.text = str(GlobalVar.score)
 
 func new_game():
-	$BgmMusic.playing = 1
+	$BgmMusic.play()
 	# Show palyer
 	GlobalVar.score = 0
 	$ScoreLabel.show()
@@ -21,7 +21,7 @@ func new_game():
 	get_tree().call_group("mobs","queue_free")
 	
 func game_over():
-	$BgmMusic.playing = 0
+	$BgmMusic.stop()
 	$RankingPage/RestartButton.visible = true
 	$RankingPage/HomeButton.visible = true
 	$MobTimer.stop()

@@ -11,7 +11,7 @@ func _ready():
 	show_message("Trivial War")
 
 func show_message(text):
-	$StartOver.playing = 1
+	$StartOver.play()
 	$Message.text = text
 	$Message.show()
 	

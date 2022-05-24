@@ -16,4 +16,5 @@ func _process(delta):
 func _on_Boss_body_entered(body):
 	._on_Mob_body_entered(body)
 	if HP <= 0:
+		$BossBgmMusic.stop()
 		GlobalVar.have_boss = 0
