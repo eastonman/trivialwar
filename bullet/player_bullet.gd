@@ -1,9 +1,7 @@
 extends Node2D
 
 var speed = 0
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var damage = 10
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,3 +18,4 @@ func _process(delta):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+
