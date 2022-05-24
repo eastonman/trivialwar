@@ -1,7 +1,7 @@
 extends Node2D
 
 var speed = 0
-var damage = 10
+var damage = 50
 
 
 # Called when the node enters the scene tree for the first time.
