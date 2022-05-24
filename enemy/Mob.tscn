@@ -3,7 +3,7 @@
 [ext_resource path="res://materialBundle/bundle1/ep_9.png" type="Texture" id=1]
 [ext_resource path="res://enemy/mob.gd" type="Script" id=2]
 
-[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+[node name="Mob" type="Area2D" groups=["mobs"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -16,4 +16,5 @@ position = Vector2( -1, 0 )
 scale = Vector2( 0.996926, 1.00403 )
 polygon = PoolVector2Array( 1.00308, 38.8435, 7.02158, 38.8435, 57.1758, -17.9278, 40.1233, -41.8314, 14.0432, -23.9037, 2.00617, -34.8595, -11.0339, -22.9077, -37.1141, -42.8274, -54.1665, -15.9358, -5.01542, 38.8435 )
 
+[connection signal="body_entered" from="." to="." method="_on_Mob_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
