@@ -32,5 +32,6 @@ wait_time = 0.2
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="hit" from="Player" to="RankingPage" method="game_over_entrypoint"]
 [connection signal="start_game" from="FirstPage" to="." method="new_game"]
+[connection signal="back_home" from="RankingPage" to="." method="back_home"]
 [connection signal="restart_game" from="RankingPage" to="." method="new_game"]
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]

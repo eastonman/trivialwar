@@ -53,6 +53,7 @@ shortcut = SubResource( 4 )
 text = "EASY"
 
 [node name="MessageTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="NormalButton" type="Button" parent="."]
 anchor_left = 0.5
