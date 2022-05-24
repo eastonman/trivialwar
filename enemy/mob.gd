@@ -19,5 +19,6 @@ func _on_Mob_body_entered(body):
 	HP -= body.damage
 	body.queue_free()
 	if HP <= 0:
+		GlobalVar.score+=1
 		queue_free()
 	pass # Replace with function body.

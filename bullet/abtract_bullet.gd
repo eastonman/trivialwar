@@ -1,7 +1,7 @@
 extends Node2D
 
 var speed = 0
-var damage = 10
+var damage = 50
 var direction = 1 # 1 means up, -1 means down
 
 

@@ -26,6 +26,7 @@ func _on_MessageTimer_timeout():
 # MessageTimer is set to oneshot
 # means do not need to stop after timeout
 func _on_RestartButton_pressed():
+	GlobalVar.score = 0
 	$RestartButton.hide()
 	$HomeButton.hide()
 	emit_signal("restart_game")
@@ -33,6 +34,7 @@ func _on_RestartButton_pressed():
 
 
 func _on_HomeButton_pressed():
+	GlobalVar.score = 0
 	$RestartButton.hide()
 	$HomeButton.hide()
 	$Message.hide()
