@@ -15,7 +15,8 @@ func new_game():
 	get_tree().call_group("mobs","queue_free")
 	
 func game_over():
-	$RankingPage/restartButton.visible = true
+	$RankingPage/RestartButton.visible = true
+	$RankingPage/HomeButton.visible = true
 	$MobTimer.stop()
 	$BulletTimer.stop()
 
@@ -26,6 +27,10 @@ func _on_MobTimer_timeout():
 		# Create elite
 		var elite = elite_scene.instance()
 		elite.position.x = rand_range(0, GlobalVar.screen_size.x)
+		match GlobalVar.Difficulty:
+			"easy":elite.speed = 600
+			"normal":elite.speed = 800
+			"difficult":elite.speed = 1000
 		# Add elite to scene
 		add_child(elite)
 	else:
@@ -33,7 +38,10 @@ func _on_MobTimer_timeout():
 		var mob = mob_scene.instance()
 		
 		mob.position.x = rand_range(0, GlobalVar.screen_size.x)
-		
+		match GlobalVar.Difficulty:
+			"easy":mob.speed = 500
+			"normal":mob.speed = 700
+			"difficult":mob.speed = 900
 		# Add mob to scene
 		add_child(mob)
 
@@ -42,3 +50,10 @@ func _on_BulletTimer_timeout():
 	var bullet = $Player.shoot()
 	add_child(bullet)
 	
+
+
+func back_home():
+	$FirstPage/EasyButton.show()
+	$FirstPage/NormalButton.show()
+	$FirstPage/HardButton.show()
+	$FirstPage._ready()

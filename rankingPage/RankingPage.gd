@@ -1,5 +1,6 @@
 extends CanvasLayer
 signal restart_game
+signal back_home
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -24,7 +25,16 @@ func _on_MessageTimer_timeout():
 
 # MessageTimer is set to oneshot
 # means do not need to stop after timeout
-func _on_restartButton_pressed():
-	$restartButton.hide()
+func _on_RestartButton_pressed():
+	$RestartButton.hide()
+	$HomeButton.hide()
 	emit_signal("restart_game")
+	$MessageTimer.start()
+
+
+func _on_HomeButton_pressed():
+	$RestartButton.hide()
+	$HomeButton.hide()
+	$Message.hide()
+	emit_signal("back_home")
 	$MessageTimer.start()
