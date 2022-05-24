@@ -4,11 +4,13 @@ export(PackedScene) var mob_scene
 
 func _ready():
 	randomize()
+	$FirstPage._ready()
 
 func _process(delta):
 	$ScoreLabel.text = str(GlobalVar.score)
 
 func new_game():
+	$BgmMusic.play()
 	# Show palyer
 	GlobalVar.score = 0
 	$ScoreLabel.show()
@@ -19,6 +21,7 @@ func new_game():
 	get_tree().call_group("mobs","queue_free")
 	
 func game_over():
+	$BgmMusic.stop()
 	$RankingPage/RestartButton.visible = true
 	$RankingPage/HomeButton.visible = true
 	$MobTimer.stop()
@@ -26,7 +29,14 @@ func game_over():
 
 # Load elite scene for later instance
 var elite_scene = preload("res://enemy/Elite.tscn")
+var boss_scene = preload("res://enemy/Boss.tscn")
+
 func _on_MobTimer_timeout():
+	if GlobalVar.have_boss==0 && GlobalVar.score%20<=10 && GlobalVar.score%20>=9:
+		GlobalVar.have_boss = 1
+		var boss = boss_scene.instance()
+		boss.position.x = 0.5*GlobalVar.screen_size.x
+		add_child(boss)
 	if randf()>0.8:
 		# Create elite
 		var elite = elite_scene.instance()

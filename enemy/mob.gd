@@ -14,6 +14,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Mob_body_entered(body):
+	$BulletHitMusic.playing = 1
 	if not body.is_in_group("PlayerBullet"):
 		return
 	HP -= body.damage

@@ -1,6 +1,7 @@
 extends Node
 var Difficulty
 var score = 0
+var have_boss = 0
 var GameLevel = 0 # 0, 1, 2 for easy normal hard
 
 var screen_size

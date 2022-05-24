@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://rankingPage/RankingPage.gd" type="Script" id=2]
 [ext_resource path="res://rankingPage/leader_board.gd" type="Script" id=3]
+[ext_resource path="res://music/success.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
@@ -70,9 +71,12 @@ text = "BACK TO HOME"
 [node name="LeaderBoard" type="ScrollContainer" parent="."]
 margin_left = 152.0
 margin_top = 241.0
-margin_right = 931.0
-margin_bottom = 1448.0
+margin_right = 897.0
+margin_bottom = 470.0
 script = ExtResource( 3 )
+
+[node name="SuccessMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
