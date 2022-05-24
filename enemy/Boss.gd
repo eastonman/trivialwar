@@ -11,3 +11,9 @@ func _process(delta):
 		speed=-speed
 	var velocity = Vector2.RIGHT * speed
 	position += velocity * delta
+
+
+func _on_Boss_body_entered(body):
+	._on_Mob_body_entered(body)
+	if HP <= 0:
+		GlobalVar.have_boss = 0

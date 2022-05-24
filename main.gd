@@ -26,7 +26,14 @@ func game_over():
 
 # Load elite scene for later instance
 var elite_scene = preload("res://enemy/Elite.tscn")
+var boss_scene = preload("res://enemy/Boss.tscn")
+
 func _on_MobTimer_timeout():
+	if GlobalVar.have_boss==0 && GlobalVar.score%20<=10 && GlobalVar.score%20>=9:
+		GlobalVar.have_boss = 1
+		var boss = boss_scene.instance()
+		boss.position.x = 0.5*GlobalVar.screen_size.x
+		add_child(boss)
 	if randf()>0.8:
 		# Create elite
 		var elite = elite_scene.instance()
