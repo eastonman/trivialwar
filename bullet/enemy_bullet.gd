@@ -1,4 +1,4 @@
-extends "res://bullet/abtract_bullet.gd"
+extends "res://bullet/abstract_bullet.gd"
 
 func _init():
 	direction = -1

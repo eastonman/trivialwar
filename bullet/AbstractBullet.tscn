@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://bullet/abtract_bullet.gd" type="Script" id=1]
+[ext_resource path="res://bullet/player_bullet.gd" type="Script" id=2]
 
 [node name="AbstractBullet" type="RigidBody2D" groups=["player_bullets"]]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -3.5, 1 )
