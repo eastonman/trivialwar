@@ -47,8 +47,10 @@ func _on_MobTimer_timeout():
 
 
 func _on_BulletTimer_timeout():
-	var bullet = $Player.shoot()
-	add_child(bullet)
+	var can_shoot_list = get_tree().get_nodes_in_group("CanShoot")
+	for node in can_shoot_list:
+		var bullet = node.shoot()
+		add_child(bullet)
 	
 
 
