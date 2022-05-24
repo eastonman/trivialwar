@@ -20,11 +20,33 @@ func show_message(text):
 #	pass
 
 
-func _on_StartButton_pressed():
-	$StartButton.hide()
+func _on_EasyButton_pressed():
+	GlobalVar.Difficulty="easy"
+	$EasyButton.hide()
+	$NormalButton.hide()
+	$HardButton.hide()
+	emit_signal("start_game")
+	$MessageTimer.start()
+
+func _on_NormalButton_pressed():
+	GlobalVar.Difficulty="normal"
+	$EasyButton.hide()
+	$NormalButton.hide()
+	$HardButton.hide()
+	emit_signal("start_game")
+	$MessageTimer.start()
+
+
+func _on_HardButton_pressed():
+	GlobalVar.Difficulty="hard"
+	$EasyButton.hide()
+	$NormalButton.hide()
+	$HardButton.hide()
 	emit_signal("start_game")
 	$MessageTimer.start()
 
 
 func _on_MessageTimer_timeout():
 	$Message.hide()
+
+
