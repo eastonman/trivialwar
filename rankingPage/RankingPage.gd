@@ -40,3 +40,4 @@ func _on_HomeButton_pressed():
 	$Message.hide()
 	emit_signal("back_home")
 	$MessageTimer.start()
+
