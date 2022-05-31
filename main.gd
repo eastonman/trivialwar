@@ -19,6 +19,7 @@ func new_game():
 	$BulletTimer.start()
 	get_tree().call_group("player_bullets","queue_free")
 	get_tree().call_group("mobs","queue_free")
+	get_tree().call_group("props","queue_free")
 	
 func game_over():
 	$BgmMusic.stop()
