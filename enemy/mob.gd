@@ -21,5 +21,7 @@ func _on_Mob_body_entered(body):
 	body.queue_free()
 	if HP <= 0:
 		GlobalVar.score+=1
-		queue_free()
 	pass # Replace with function body.
+
+func getProp():
+	pass

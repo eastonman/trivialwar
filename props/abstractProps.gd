@@ -16,7 +16,7 @@ func _process(delta):
 	var velocity = Vector2.UP * abs(speedY) * direction
 	velocity += Vector2.RIGHT * speedX
 	position += velocity * delta
-	if(position.x>=GlobalVar.screen_size.x):
+	if(position.x>=GlobalVar.screen_size.x || position.x<=0):
 		speedX=-speedX
 
 

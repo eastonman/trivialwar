@@ -16,3 +16,21 @@ func shoot():
 	bullet.speed = 1000
 	# Add bullet
 	return bullet
+
+func getProp():
+	var string
+	var rand = randf()
+	if(rand < 0.4):
+		string = "Blood"
+	elif(rand>=0.4&&rand<0.6):
+		string = "Bullet"
+	elif(rand>=0.6&&rand<0.8):
+		string = "Bomb"
+	else:
+		return null
+	
+	var props_scene = load("res://props/"+string+".tscn")
+	var props = props_scene.instance()
+	props.position.x = position.x
+	props.position.y = position.y
+	return props

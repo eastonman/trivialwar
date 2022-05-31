@@ -8,6 +8,13 @@ func _ready():
 
 func _process(delta):
 	$ScoreLabel.text = str(GlobalVar.score)
+	var mob_list = get_tree().get_nodes_in_group("mobs")
+	for node in mob_list:
+		if(node.HP <=0):
+			var prop = node.getProp()
+			if(prop!=null):
+				add_child(prop)
+			node.queue_free()
 
 func new_game():
 	$BgmMusic.play()
@@ -87,3 +94,4 @@ func back_home():
 	$FirstPage/NormalButton.show()
 	$FirstPage/HardButton.show()
 	$FirstPage._ready()
+	get_tree().call_group("mobs","queue_free")

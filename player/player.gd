@@ -65,4 +65,4 @@ func shoot():
 	bullet.speed = -1000
 	# Add bullet
 	return bullet
-	
+	pass
