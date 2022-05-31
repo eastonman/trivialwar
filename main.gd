@@ -7,7 +7,8 @@ func _ready():
 	$FirstPage._ready()
 
 func _process(delta):
-	$ScoreLabel.text = str(GlobalVar.score)
+	$ScoreLabel.text = "SCORE: "+str(GlobalVar.score)
+	$LifeLabel.text = "LIFE: "+str($Player.HP)
 	var mob_list = get_tree().get_nodes_in_group("mobs")
 	for node in mob_list:
 		if(node.HP <=0):
@@ -22,6 +23,7 @@ func new_game():
 	# Show palyer
 	GlobalVar.score = 0
 	$ScoreLabel.show()
+	$LifeLabel.show()
 	$Player.start($PlayerStartPosition.position)
 	$MobTimer.start()
 	$BulletTimer.start()
@@ -91,6 +93,7 @@ func _on_BulletTimer_timeout():
 
 func back_home():
 	$ScoreLabel.hide()
+	$LifeLabel.hide()
 	$FirstPage/EasyButton.show()
 	$FirstPage/NormalButton.show()
 	$FirstPage/HardButton.show()
