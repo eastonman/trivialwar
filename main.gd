@@ -17,6 +17,7 @@ func _process(delta):
 			node.queue_free()
 
 func new_game():
+	$Player.init()
 	$BgmMusic.play()
 	# Show palyer
 	GlobalVar.score = 0

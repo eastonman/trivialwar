@@ -4,10 +4,14 @@ export var speed = 480
 var screen_size
 var player_height
 var player_width
+var HP = 2000
+const HPMax = 2000
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
+func init():
+	HP = HPMax
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,3 +70,32 @@ func shoot():
 	# Add bullet
 	return bullet
 	pass
+
+
+func _on_Player_body_entered(body):
+	if  body.is_in_group("PlayerBullet"):
+		return
+	elif(body.is_in_group("EnemyBullet")):
+		HP -= body.damage
+		body.queue_free()
+	elif(body.is_in_group("props")):
+		if(body.is_in_group("blood")):
+			if(HP+body.HP > HPMax):
+				 HP = HPMax
+			else:
+				HP = HP+body.HP
+			print("get blood props!\n")
+			body.queue_free()
+		elif(body.is_in_group("bullet")):
+			print("get bullet props!\n")
+			body.queue_free()
+		elif(body.is_in_group("bomb")):
+			print("get bomb props!\n")
+			body.queue_free()
+			get_tree().call_group("mobs","queue_free")
+			get_tree().call_group("player_bullets","queue_free")
+	if HP <= 0:
+		hide()
+		emit_signal("hit")
+		$CollisionPolygon2D.set_deferred("disabled", true)
+	pass # Replace with function body.
