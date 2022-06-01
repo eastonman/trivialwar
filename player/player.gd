@@ -1,5 +1,6 @@
 extends Area2D
 signal hit
+signal getSupply
 export var speed = 480
 var screen_size
 var player_height
@@ -79,6 +80,7 @@ func _on_Player_body_entered(body):
 		HP -= body.damage
 		body.queue_free()
 	elif(body.is_in_group("props")):
+		emit_signal("getSupply")
 		if(body.is_in_group("blood")):
 			if(HP+body.HP > HPMax):
 				 HP = HPMax

@@ -1,6 +1,8 @@
 extends CanvasLayer
 signal restart_game
 signal back_home
+signal successMusic_Play
+signal successMusic_Stop
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -11,7 +13,8 @@ func _ready():
 	pass
 	
 func game_over_entrypoint():
-	$SuccessMusic.playing = 1
+	emit_signal("successMusic_Play")
+	#$SuccessMusic.playing = 1
 	show_message("GAME OVER")
 
 func show_message(text):
@@ -27,7 +30,8 @@ func _on_MessageTimer_timeout():
 # MessageTimer is set to oneshot
 # means do not need to stop after timeout
 func _on_RestartButton_pressed():
-	$SuccessMusic.playing = 0
+	emit_signal("successMusic_Stop")
+	#$SuccessMusic.playing = 0
 	GlobalVar.score = 0
 	$RestartButton.hide()
 	$HomeButton.hide()
@@ -36,7 +40,8 @@ func _on_RestartButton_pressed():
 
 
 func _on_HomeButton_pressed():
-	$SuccessMusic.playing = 0
+	emit_signal("successMusic_Stop")
+	#$SuccessMusic.playing = 0
 	GlobalVar.score = 0
 	$RestartButton.hide()
 	$HomeButton.hide()

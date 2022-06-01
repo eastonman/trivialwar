@@ -3,6 +3,7 @@ extends "res://enemy//mob.gd"
 var x_range=0.8
 
 func _ready():
+	$MusicController.bossBgmPlayCircle()
 	add_to_group('CanShoot')
 
 func _init():
@@ -45,5 +46,6 @@ func _on_Boss_body_entered(body):
 	._on_Mob_body_entered(body)
 	if HP <= 0:
 		GlobalVar.score+=1
-		$BossBgmMusic.stop()
+		$MusicController.bossBgmStop()
+		#$BossBgmMusic.stop()
 		GlobalVar.have_boss = 0

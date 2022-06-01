@@ -1,6 +1,7 @@
 extends CanvasLayer
 signal start_game
-
+signal startOver_play
+signal startOver_stop
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -11,7 +12,8 @@ func _ready():
 	show_message("Trivial War")
 
 func show_message(text):
-	$StartOver.play()
+	emit_signal("startOver_play")
+	#$StartOver.play()
 	$Message.text = text
 	$Message.show()
 	
@@ -22,7 +24,8 @@ func show_message(text):
 
 
 func _on_EasyButton_pressed():
-	$StartOver.playing = 0
+	emit_signal("startOver_stop")
+	#$StartOver.playing = 0
 	GlobalVar.Difficulty="easy"
 	$EasyButton.hide()
 	$NormalButton.hide()
@@ -31,7 +34,8 @@ func _on_EasyButton_pressed():
 	$MessageTimer.start()
 
 func _on_NormalButton_pressed():
-	$StartOver.playing = 0
+	emit_signal("startOver_stop")
+	#$StartOver.playing = 0
 	GlobalVar.Difficulty="normal"
 	$EasyButton.hide()
 	$NormalButton.hide()
@@ -41,7 +45,8 @@ func _on_NormalButton_pressed():
 
 
 func _on_HardButton_pressed():
-	$StartOver.playing = 0
+	emit_signal("startOver_stop")
+	#$StartOver.playing = 0
 	GlobalVar.Difficulty="hard"
 	$EasyButton.hide()
 	$NormalButton.hide()

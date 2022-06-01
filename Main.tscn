@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://enemy/Mob.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://music/bgm.wav" type="AudioStream" id=7]
 [ext_resource path="res://music/bgm_boss.wav" type="AudioStream" id=8]
+[ext_resource path="res://music/MusicController.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -65,10 +66,18 @@ margin_bottom = 186.0
 custom_fonts/font = SubResource( 2 )
 text = "LIFE:	   "
 
+[node name="MusicController" parent="." instance=ExtResource( 9 )]
+visible = false
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="getSupply" from="Player" to="MusicController" method="_on_Player_getSupply"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="hit" from="Player" to="RankingPage" method="game_over_entrypoint"]
+[connection signal="startOver_play" from="FirstPage" to="MusicController" method="_on_FirstPage_startOver_play"]
+[connection signal="startOver_stop" from="FirstPage" to="MusicController" method="_on_FirstPage_startOver_stop"]
 [connection signal="start_game" from="FirstPage" to="." method="new_game"]
 [connection signal="back_home" from="RankingPage" to="." method="back_home"]
 [connection signal="restart_game" from="RankingPage" to="." method="new_game"]
+[connection signal="successMusic_Play" from="RankingPage" to="MusicController" method="_on_RankingPage_successMusic_Play"]
+[connection signal="successMusic_Stop" from="RankingPage" to="MusicController" method="_on_RankingPage_successMusic_Stop"]
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]

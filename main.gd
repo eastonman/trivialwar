@@ -12,6 +12,8 @@ func _process(delta):
 	var mob_list = get_tree().get_nodes_in_group("mobs")
 	for node in mob_list:
 		if(node.HP <=0):
+			if(node.is_in_group("boss")):
+				$MusicController.bgmPlayCircle()
 			var prop = node.getProp()
 			if(prop!=null):
 				add_child(prop)
@@ -19,7 +21,8 @@ func _process(delta):
 
 func new_game():
 	$Player.init()
-	$BgmMusic.play()
+	$MusicController.bgmPlayCircle()
+	#$BgmMusic.play()
 	# Show palyer
 	GlobalVar.score = 0
 	$ScoreLabel.show()
@@ -32,11 +35,14 @@ func new_game():
 	get_tree().call_group("props","queue_free")
 	
 func game_over():
-	$BgmMusic.stop()
+	$MusicController.bgmStop()
+	#$BgmMusic.stop()
 	$RankingPage/RestartButton.visible = true
 	$RankingPage/HomeButton.visible = true
 	$MobTimer.stop()
 	$BulletTimer.stop()
+	get_tree().call_group("boss","queue_free")
+	GlobalVar.have_boss = 0
 
 # Load elite scene for later instance
 var elite_scene = preload("res://enemy/Elite.tscn")
@@ -48,6 +54,7 @@ func _on_MobTimer_timeout():
 		var boss = boss_scene.instance()
 		boss.position.x = 0.5*GlobalVar.screen_size.x
 		add_child(boss)
+		$MusicController.bgmStop()
 	if randf()>0.8:
 		# Create elite
 		var elite = elite_scene.instance()

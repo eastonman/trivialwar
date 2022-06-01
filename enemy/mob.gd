@@ -14,9 +14,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Mob_body_entered(body):
-	$BulletHitMusic.playing = 1
 	if not body.is_in_group("PlayerBullet"):
 		return
+	$MusicController.bulletHitMusicPlay()
+	#$BulletHitMusic.playing = 1
 	HP -= body.damage
 	body.queue_free()
 	if HP <= 0:
