@@ -2,6 +2,7 @@ extends Area2D
 signal hit
 signal getSupply
 export var speed = 480
+var shootNum = 1
 var screen_size
 var player_height
 var player_width
@@ -64,12 +65,13 @@ func start(pos):
 
 var bullet_scene = preload("res://bullet/PlayerBullet.tscn") 
 func shoot():
-	var bullet = bullet_scene.instance()
-	bullet.position.x = position.x
-	bullet.position.y = position.y
-	bullet.speed = -1000
-	# Add bullet
-	return bullet
+#	var bullet = bullet_scene.instance()
+#	bullet.position.x = position.x
+#	bullet.position.y = position.y
+#	bullet.speed = -1000
+#	# Add bullet
+#	return bullet
+	return $BulletStrategy.straightShoot(shootNum,self)
 	pass
 
 

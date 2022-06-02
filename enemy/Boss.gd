@@ -23,7 +23,7 @@ func shoot():
 	bullet.position.y = position.y
 	bullet.speed = 1000
 	# Add bullet
-	return bullet
+	return [bullet]
 
 func getProp():
 	var string

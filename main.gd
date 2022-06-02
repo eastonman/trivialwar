@@ -93,8 +93,9 @@ func _on_MobTimer_timeout():
 func _on_BulletTimer_timeout():
 	var can_shoot_list = get_tree().get_nodes_in_group("CanShoot")
 	for node in can_shoot_list:
-		var bullet = node.shoot()
-		add_child(bullet)
+		var bullets = node.shoot()
+		for bullet in bullets:
+			add_child(bullet)
 	
 
 
