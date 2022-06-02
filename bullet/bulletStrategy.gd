@@ -16,36 +16,39 @@ func straightShoot(shootNum,body):
 		var bullet_scene = load("res://bullet/EnemyBullet.tscn") 
 		for i in range(shootNum):
 			var bullet = bullet_scene.instance()
-			bullet.position.x = body.position.x+ (i*2 - shootNum + 1)*100
+			bullet.position.x = body.position.x+ (i*2 - shootNum + 1)*30
 			bullet.position.y = body.position.y
-			bullet.speed = 1000
+			bullet.speedY = 1000
 			bullets.append(bullet)
 	else:
 		var bullet_scene = load("res://bullet/PlayerBullet.tscn") 
 		for i in range(shootNum):
 			var bullet = bullet_scene.instance()
-			bullet.position.x = body.position.x + (i*2 - shootNum + 1)*100
+			bullet.position.x = body.position.x + (i*2 - shootNum + 1)*30
 			bullet.position.y = body.position.y
-			bullet.speed = -1000
+			bullet.speedY = -1000
 			bullets.append(bullet)
 	return bullets
 
 func multiShoot(shootNum,body):
 	var bullets = []
+	var metaAngle = PI/(shootNum+1)
 	if(body.is_in_group("mobs")):
 		var bullet_scene = load("res://bullet/EnemyBullet.tscn") 
 		for i in range(shootNum):
 			var bullet = bullet_scene.instance()
-			bullet.position.x = body.position.x+ (i*2 - shootNum + 1)*100
+			bullet.position.x = body.position.x+ (i*2 - shootNum + 1)*10
 			bullet.position.y = body.position.y
-			bullet.speed = 1000
+			bullet.speedY = 500*sin((i+1)*metaAngle)
+			bullet.speedX = 500*cos((i+1)*metaAngle)
 			bullets.append(bullet)
 	else:
 		var bullet_scene = load("res://bullet/PlayerBullet.tscn") 
 		for i in range(shootNum):
 			var bullet = bullet_scene.instance()
-			bullet.position.x = body.position.x+ (i*2 - shootNum + 1)*100
+			bullet.position.x = body.position.x+ (i*2 - shootNum + 1)*10
 			bullet.position.y = body.position.y
-			bullet.speed = -1000
+			bullet.speedY = 500*sin((i+1)*metaAngle)
+			bullet.speedX = 500*cos((i+1)*metaAngle)
 			bullets.append(bullet)
 	return bullets

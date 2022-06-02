@@ -2,7 +2,7 @@ extends Area2D
 signal hit
 signal getSupply
 export var speed = 480
-var shootNum = 1
+var shootNum = 3
 var screen_size
 var player_height
 var player_width
@@ -72,7 +72,7 @@ func shoot():
 #	bullet.speed = -1000
 #	# Add bullet
 #	return [bullet]
-	return $BulletStrategy.straightShoot(shootNum,self)
+	return $BulletStrategy.multiShoot(shootNum,self)
 
 
 func _on_Player_body_entered(body):

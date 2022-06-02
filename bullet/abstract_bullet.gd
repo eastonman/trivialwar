@@ -1,6 +1,7 @@
 extends Node2D
 
-var speed = 0
+var speedY = 0
+var speedX = 0
 var direction = 1 # 1 means up, -1 means down
 var damage = 50
 
@@ -14,7 +15,8 @@ func _ready():
 #func _process(delta):
 #	pass
 func _process(delta):
-	var velocity = Vector2.UP * abs(speed) * direction
+	var velocity = Vector2.UP * abs(speedY) * direction
+	velocity += Vector2.RIGHT * speedX
 	position += velocity * delta
 
 func _on_VisibilityNotifier2D_screen_exited():
