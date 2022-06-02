@@ -16,6 +16,9 @@ func game_over_entrypoint():
 	emit_signal("successMusic_Play")
 	#$SuccessMusic.playing = 1
 	show_message("GAME OVER")
+	var wsreq = {'type': GlobalVar.GetLeaderBoard,'param':0}
+	GlobalVar.send_message(JSON.print(wsreq))
+	$LeaderBoard.visible = true
 
 func show_message(text):
 	$Message.text = text
@@ -37,6 +40,7 @@ func _on_RestartButton_pressed():
 	$HomeButton.hide()
 	emit_signal("restart_game")
 	$MessageTimer.start()
+	$LeaderBoard.visible = false
 
 
 func _on_HomeButton_pressed():
@@ -48,4 +52,5 @@ func _on_HomeButton_pressed():
 	$Message.hide()
 	emit_signal("back_home")
 	$MessageTimer.start()
+	$LeaderBoard.visible = false
 
