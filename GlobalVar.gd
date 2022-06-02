@@ -6,6 +6,13 @@ var GameLevel = 0 # 0, 1, 2 for easy normal hard
 
 var screen_size
 
+# Commands
+const GetAllUsers = 0
+const JoinUser = 1
+const StartMultiplayerGame = 2
+const ReportScore = 3
+const GetLeaderBoard = 4
+
 # The URL we will connect to.
 export var websocket_url = "ws://localhost:8080/socket"
 
@@ -27,7 +34,9 @@ func _ready():
 func _connected(proto = ""):
 	print("Connected to " + websocket_url)
 	send_message("Hello world")
-	send_message("Random req for JSON")
+	var wsreq = {'type': GetLeaderBoard,'param':0}
+	send_message(JSON.print(wsreq))
+	
 	
 func _on_data_received():
 	var data = _client.get_peer(1).get_packet().get_string_from_utf8()
