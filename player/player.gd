@@ -20,6 +20,7 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	player_height=$Sprite.texture.get_height()
 	player_width=$Sprite.texture.get_width()
+	add_to_group("CanShoot")
 
 func _process(delta):
 	var velocity = Vector2.ZERO
@@ -70,9 +71,8 @@ func shoot():
 #	bullet.position.y = position.y
 #	bullet.speed = -1000
 #	# Add bullet
-#	return bullet
+#	return [bullet]
 	return $BulletStrategy.straightShoot(shootNum,self)
-	pass
 
 
 func _on_Player_body_entered(body):
