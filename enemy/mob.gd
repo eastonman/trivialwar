@@ -26,3 +26,7 @@ func _on_Mob_body_entered(body):
 
 func getProp():
 	pass
+
+func explore():
+	HP=0
+	GlobalVar.score+=1

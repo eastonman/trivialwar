@@ -20,5 +20,9 @@ polygon = PoolVector2Array( 30.72, 53.5, -29.7448, 54.5, -38.5219, 18.5, -63.878
 
 [node name="BulletStrategy" parent="." instance=ExtResource( 3 )]
 
+[node name="BulletTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_Player_hit"]
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]

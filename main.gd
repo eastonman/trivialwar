@@ -21,6 +21,8 @@ func _process(delta):
 
 func new_game():
 	$Player.init()
+	$Player.multiShootTime = 0
+	$Player.shootNum=$Player.shootNumMin
 	$MusicController.bgmPlayCircle()
 	#$BgmMusic.play()
 	# Show palyer
@@ -35,6 +37,8 @@ func new_game():
 	get_tree().call_group("props","queue_free")
 	
 func game_over():
+	$Player.multiShootTime = 0
+	$Player.shootNum=$Player.shootNumMin
 	$MusicController.bgmStop()
 	#$BgmMusic.stop()
 	$RankingPage/RestartButton.visible = true

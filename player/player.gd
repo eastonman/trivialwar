@@ -3,6 +3,8 @@ signal hit
 signal getSupply
 export var speed = 480
 var shootNum = 3
+const shootNumMin = 3
+var multiShootTime = 0
 var screen_size
 var player_height
 var player_width
@@ -72,8 +74,10 @@ func shoot():
 #	bullet.speed = -1000
 #	# Add bullet
 #	return [bullet]
-	return $BulletStrategy.multiShoot(shootNum,self)
-
+	if(multiShootTime>0):
+		return $BulletStrategy.multiShoot(shootNum,self)
+	else:
+		return $BulletStrategy.straightShoot(shootNum,self)
 
 func _on_Player_body_entered(body):
 	if  body.is_in_group("PlayerBullet"):
@@ -93,13 +97,20 @@ func _on_Player_body_entered(body):
 		elif(body.is_in_group("bullet")):
 			print("get bullet props!\n")
 			body.queue_free()
+			multiShootTime+=10
+			shootNum+=1
 		elif(body.is_in_group("bomb")):
 			print("get bomb props!\n")
 			body.queue_free()
-			get_tree().call_group("mobs","queue_free")
+			get_tree().call_group("mobs","explore")
 			get_tree().call_group("player_bullets","queue_free")
 	if HP <= 0:
 		hide()
 		emit_signal("hit")
 		$CollisionPolygon2D.set_deferred("disabled", true)
 	pass # Replace with function body.
+
+
+func _on_BulletTimer_timeout():
+	if(multiShootTime>0):
+		multiShootTime-=1

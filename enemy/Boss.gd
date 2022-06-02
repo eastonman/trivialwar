@@ -44,6 +44,15 @@ func getProp():
 	props.position.y = position.y
 	return props
 
+func explore():
+	if(HP>500):
+		HP-=500
+	else:
+		HP=0
+		GlobalVar.score+=1
+		$MusicController.bossBgmStop()
+		GlobalVar.have_boss = 0
+
 func _on_Boss_body_entered(body):
 	._on_Mob_body_entered(body)
 	if HP <= 0:
