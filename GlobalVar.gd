@@ -7,6 +7,9 @@ var GameLevel = 0 # 0, 1, 2 for easy normal hard
 # Multi-player
 var is_multiplayer_mode = true 
 
+# Signals
+signal update_multi_player_score(raw_data)
+
 var screen_size
 
 # Commands
@@ -36,7 +39,6 @@ func _ready():
 	
 func _connected(proto = ""):
 	print("Connected to " + websocket_url)
-	send_message("Hello world")
 	
 	
 	
@@ -48,6 +50,8 @@ func _on_data_received():
 	if packet['type'] == GetLeaderBoard:
 		var leaderboard = get_node("/root/Main/RankingPage/LeaderBoard")
 		leaderboard.display(data)
+	elif packet['type'] == ReportScore:
+		emit_signal("update_multi_player_score", data)
 	else:
 		print("Undefined Type")
 	

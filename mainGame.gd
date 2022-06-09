@@ -4,6 +4,7 @@ export(PackedScene) var mob_scene
 
 func _ready():
 	randomize()
+	GlobalVar.connect("update_multi_player_score", self, "_on_GlobalVar_update_multi_player_score")
 	$FirstPage._ready()
 
 func _process(delta):
@@ -27,14 +28,23 @@ func new_game():
 	#$BgmMusic.play()
 	# Show palyer
 	GlobalVar.score = 0
+	
+	# Init HUD display
 	$ScoreLabel.show()
 	$LifeLabel.show()
+	if GlobalVar.is_multiplayer_mode:
+		$MultiPlayerScoreLabel.show()
+	
 	$Player.start($PlayerStartPosition.position)
 	$MobTimer.start()
 	$BulletTimer.start()
 	get_tree().call_group("player_bullets","queue_free")
 	get_tree().call_group("mobs","queue_free")
 	get_tree().call_group("props","queue_free")
+	
+	# Tell backend we have started
+	var wsreq = {'type': GlobalVar.StartMultiplayerGame,'param':'0'}
+	GlobalVar.send_message(JSON.print(wsreq))
 	
 func game_over():
 	$Player.multiShootTime = 0
@@ -111,3 +121,7 @@ func back_home():
 	$FirstPage/HardButton.show()
 	$FirstPage._ready()
 	get_tree().call_group("mobs","queue_free")
+
+
+func _on_GlobalVar_update_multi_player_score(raw_data):
+	$MultiPlayerScoreLabel.text = "Rival: "+raw_data
