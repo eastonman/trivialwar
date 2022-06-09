@@ -12,6 +12,9 @@ signal update_multi_player_score(raw_data)
 
 var screen_size
 
+var userName
+var passWord
+
 # Commands
 const GetAllUsers = 0
 const JoinUser = 1
