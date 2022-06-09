@@ -9,6 +9,9 @@ var is_multiplayer_mode = true
 
 var screen_size
 
+var userName
+var passWord
+
 # Commands
 const GetAllUsers = 0
 const JoinUser = 1
