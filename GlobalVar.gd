@@ -4,6 +4,9 @@ var score = 0
 var have_boss = 0
 var GameLevel = 0 # 0, 1, 2 for easy normal hard
 
+# Multi-player
+var is_multiplayer_mode = true 
+
 var screen_size
 
 # Commands
