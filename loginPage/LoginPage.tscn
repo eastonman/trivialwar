@@ -8,7 +8,7 @@ size = 64
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 40
+size = 20
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -41,7 +41,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Trivial War"
 align = 1
 
-[node name="UserName" type="TextEdit" parent="."]
+[node name="UserName" type="LineEdit" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -52,7 +52,7 @@ margin_right = 231.0
 margin_bottom = 127.0
 custom_fonts/font = SubResource( 2 )
 
-[node name="PassWord" type="TextEdit" parent="."]
+[node name="PassWord" type="LineEdit" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -107,6 +107,4 @@ margin_bottom = 1574.0
 custom_fonts/font = SubResource( 6 )
 text = "CONFIRM"
 
-[connection signal="text_changed" from="UserName" to="." method="_on_UserName_text_changed"]
-[connection signal="text_changed" from="PassWord" to="." method="_on_PassWord_text_changed"]
 [connection signal="pressed" from="ConfirmButton" to="." method="_on_ConfirmButton_pressed"]

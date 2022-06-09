@@ -16,16 +16,6 @@ func _ready():
 #	pass
 
 
-func _on_UserName_text_changed():
-	GlobalVar.userName = $UserName.text
-	pass # Replace with function body.
-
-
-func _on_PassWord_text_changed():
-	GlobalVar.passWord = $PassWord.text
-	pass # Replace with function body.
-
-
 func _on_ConfirmButton_pressed():
 	GlobalVar.userName = $UserName.text
 	GlobalVar.passWord = $PassWord.text
