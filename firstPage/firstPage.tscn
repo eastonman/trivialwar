@@ -1,13 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://firstPage/firstPage.gd" type="Script" id=2]
+[ext_resource path="res://music/startover.wav" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="InputEventAction" id=3]
+action = "user_confirm"
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 64
 font_data = ExtResource( 1 )
 
@@ -25,7 +40,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Trivial War"
 align = 1
 
-[node name="StartButton" type="Button" parent="."]
+[node name="EasyButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -35,9 +50,40 @@ margin_top = -10.0
 margin_right = 125.5
 margin_bottom = 74.0
 custom_fonts/font = SubResource( 2 )
-text = "START"
+shortcut = SubResource( 4 )
+text = "EASY"
 
 [node name="MessageTimer" type="Timer" parent="."]
+one_shot = true
 
-[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[node name="NormalButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -727.0
+margin_right = 166.0
+margin_bottom = -643.0
+custom_fonts/font = SubResource( 5 )
+text = "NORMAL"
+
+[node name="HardButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.0
+margin_top = 414.0
+margin_right = 108.0
+margin_bottom = 498.0
+custom_fonts/font = SubResource( 6 )
+text = "HARD"
+
+[node name="StartOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="pressed" from="EasyButton" to="." method="_on_EasyButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
+[connection signal="pressed" from="NormalButton" to="." method="_on_NormalButton_pressed"]
+[connection signal="pressed" from="HardButton" to="." method="_on_HardButton_pressed"]

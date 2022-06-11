@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 var HP = 100
 var speed = 600
@@ -11,3 +11,22 @@ func _process(delta):
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 	pass # Replace with function body.
+
+
+func _on_Mob_body_entered(body):
+	if not body.is_in_group("PlayerBullet"):
+		return
+	$MusicController.bulletHitMusicPlay()
+	#$BulletHitMusic.playing = 1
+	HP -= body.damage
+	body.queue_free()
+	if HP <= 0:
+		GlobalVar.score+=1
+	pass # Replace with function body.
+
+func getProp():
+	pass
+
+func explore():
+	HP=0
+	GlobalVar.score+=1
