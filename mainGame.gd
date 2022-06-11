@@ -18,6 +18,7 @@ func _process(delta):
 			var prop = node.getProp()
 			if(prop!=null):
 				add_child(prop)
+				make_label_top()
 			node.queue_free()
 
 func new_game():
@@ -69,6 +70,7 @@ func _on_MobTimer_timeout():
 		var boss = boss_scene.instance()
 		boss.position.x = 0.5*GlobalVar.screen_size.x
 		add_child(boss)
+		make_label_top()
 		$MusicController.bgmStop()
 	if randf()>0.8:
 		# Create elite
@@ -86,6 +88,7 @@ func _on_MobTimer_timeout():
 				elite.HP = 400
 		# Add elite to scene
 		add_child(elite)
+		make_label_top()
 	else:
 		# Create mob
 		var mob = mob_scene.instance()
@@ -103,6 +106,7 @@ func _on_MobTimer_timeout():
 				mob.HP = 200
 		# Add mob to scene
 		add_child(mob)
+		make_label_top()
 
 
 func _on_BulletTimer_timeout():
@@ -111,6 +115,7 @@ func _on_BulletTimer_timeout():
 		var bullets = node.shoot()
 		for bullet in bullets:
 			add_child(bullet)
+			make_label_top()
 	
 
 
@@ -127,7 +132,11 @@ func back_home():
 func _on_GlobalVar_update_multi_player_score(raw_data):
 	$MultiPlayerScoreLabel.text = "Rival: "+raw_data
 
-
 func _on_ScoreReportTimer_timeout():
 	var wsreq = {"type": GlobalVar.ReportScore, "param": str(GlobalVar.score)}
 	GlobalVar.send_message(JSON.print(wsreq))
+
+func make_label_top():
+	move_child($LifeLabel,get_child_count())
+	move_child($ScoreLabel,get_child_count())
+	move_child($MultiPlayerScoreLabel,get_child_count())
