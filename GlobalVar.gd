@@ -5,15 +5,17 @@ var have_boss = 0
 var GameLevel = 0 # 0, 1, 2 for easy normal hard
 
 # Multi-player
-var is_multiplayer_mode = true 
+var is_multiplayer_mode = true
+var is_login = false
 
 # Signals
 signal update_multi_player_score(raw_data)
+signal backend_login_callback(message)
 
 var screen_size
 
-var userName
-var passWord
+var userName: String
+var passWord: String
 
 # Commands
 const GetAllUsers = 0
@@ -21,6 +23,8 @@ const JoinUser = 1
 const StartMultiplayerGame = 2
 const ReportScore = 3
 const GetLeaderBoard = 4
+const Login = 5
+const Bye = 6
 
 # The URL we will connect to.
 export var websocket_url = "ws://localhost:8080/socket"
@@ -55,6 +59,8 @@ func _on_data_received():
 		leaderboard.display(data)
 	elif packet['type'] == ReportScore:
 		emit_signal("update_multi_player_score", data)
+	elif packet['type'] == Login:
+		emit_signal("backend_login_callback", data)
 	else:
 		print("Undefined Type")
 	
@@ -62,6 +68,12 @@ func _on_data_received():
 func send_message(message):
 	_client.get_peer(1).put_packet(message.to_utf8())
 	
+	
+# Backend communication func
+func backend_login():
+	var info = {"username": userName, "hash": passWord.sha256_text()}
+	var wsreq = {"type": Login, "param": JSON.print(info)}
+	send_message(JSON.print(wsreq))
 	
 	
 func _process(delta):

@@ -8,7 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	GlobalVar.connect("backend_login_callback", $loginPage, "login_callback")
 	pass # Replace with function body.
 
 

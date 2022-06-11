@@ -11,13 +11,19 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func login_callback(message: String):
+	if message == "passed":
+		emit_signal("confirmAccount")
+	elif message == "denied":
+		print("Login failed")
+		# Close the whole game
+		get_tree().quit()
+	else:
+		print("ERROR: unexpected")
 
 
 func _on_ConfirmButton_pressed():
 	GlobalVar.userName = $UserName.text
 	GlobalVar.passWord = $PassWord.text
-	emit_signal("confirmAccount")
-	pass # Replace with function body.
+	GlobalVar.backend_login()
+	
