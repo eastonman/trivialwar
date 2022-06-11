@@ -10,13 +10,13 @@ signal successMusic_Stop
 
 
 func _ready():
-	pass
+	GlobalVar.connect("backend_leaderboard_callback", $LeaderBoard, "display")
 	
 func game_over_entrypoint():
 	emit_signal("successMusic_Play")
 	#$SuccessMusic.playing = 1
 	show_message("GAME OVER")
-	var wsreq = {'type': GlobalVar.GetLeaderBoard,'param':0}
+	var wsreq = {'type': GlobalVar.GetLeaderBoard,'param':'0'}
 	GlobalVar.send_message(JSON.print(wsreq))
 	$LeaderBoard.visible = true
 

@@ -11,6 +11,7 @@ var is_login = false
 # Signals
 signal update_multi_player_score(raw_data)
 signal backend_login_callback(message)
+signal backend_leaderboard_callback(data)
 
 var screen_size
 
@@ -55,8 +56,7 @@ func _on_data_received():
 	var packet = JSON.parse(data).result
 	data = packet['data']
 	if packet['type'] == GetLeaderBoard:
-		var leaderboard = get_node("/root/Main/RankingPage/LeaderBoard")
-		leaderboard.display(data)
+		emit_signal("backend_leaderboard_callback", data)
 	elif packet['type'] == ReportScore:
 		emit_signal("update_multi_player_score", data)
 	elif packet['type'] == Login:

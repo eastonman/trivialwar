@@ -34,6 +34,7 @@ func new_game():
 	$LifeLabel.show()
 	if GlobalVar.is_multiplayer_mode:
 		$MultiPlayerScoreLabel.show()
+		$ScoreReportTimer.start(1) # 1sec
 	
 	$Player.start($PlayerStartPosition.position)
 	$MobTimer.start()
@@ -125,3 +126,8 @@ func back_home():
 
 func _on_GlobalVar_update_multi_player_score(raw_data):
 	$MultiPlayerScoreLabel.text = "Rival: "+raw_data
+
+
+func _on_ScoreReportTimer_timeout():
+	var wsreq = {"type": GlobalVar.ReportScore, "param": str(GlobalVar.score)}
+	GlobalVar.send_message(JSON.print(wsreq))
