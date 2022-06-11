@@ -40,3 +40,19 @@ func _on_loginPage_confirmAccount():
 	choosePVP.connect("multiPlay", self, "_on_ChoosePVP_multiPlay")
 	remove_child($loginPage)
 	pass # Replace with function body.
+
+var loginPage_scene = preload("res://loginPage/LoginPage.tscn")
+func _on_signinPage_signinConfirm():
+	var loginPage = loginPage_scene.instance()
+	remove_child($SigninPage)
+	add_child(loginPage)
+	loginPage.connect("confirmAccount",self,"_on_loginPage_confirmAccount")
+	loginPage.connect("signinAccount",self,"_on_signinPage_signinConfirm")
+
+var signinPage_scene = preload("res://signinPage/SigninPage.tscn")
+func _on_loginPage_signinAccount():
+	var signinPage = signinPage_scene.instance()
+	add_child(signinPage)
+	signinPage.connect("signinConfirm",self,"_on_signinPage_signinConfirm")
+	remove_child($loginPage)
+	pass # Replace with function body.

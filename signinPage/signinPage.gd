@@ -1,6 +1,6 @@
 extends CanvasLayer
-signal confirmAccount
-signal signinAccount
+signal signinConfirm
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -21,13 +21,8 @@ func login_callback(message: String):
 	else:
 		print("ERROR: unexpected")
 
-
 func _on_ConfirmButton_pressed():
 	GlobalVar.userName = $UserName.text
 	GlobalVar.passWord = $PassWord.text
 	GlobalVar.backend_login()
-	
-
-
-func _on_SigninButton_pressed():
-	emit_signal("signinAccount")
+	emit_signal("signinConfirm")
