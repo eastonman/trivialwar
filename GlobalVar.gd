@@ -11,6 +11,7 @@ var is_login = false
 # Signals
 signal update_multi_player_score(raw_data)
 signal backend_login_callback(message)
+signal backend_leaderboard_callback(data)
 
 var screen_size
 
@@ -27,7 +28,7 @@ const Login = 5
 const Bye = 6
 
 # The URL we will connect to.
-export var websocket_url = "ws://localhost:8080/socket"
+export var websocket_url = "wss://trivialwar.eastonman.com/socket"
 
 # Our WebSocketClient instance.
 var _client = WebSocketClient.new()
@@ -39,7 +40,7 @@ func _ready():
 	# Initiate connection to the given URL.
 	_client.connect("connection_established", self, "_connected")
 	_client.connect("data_received", self, "_on_data_received")
-	var err = _client.connect_to_url(websocket_url)
+	var err = _client.connect_to_url(websocket_url, [], false, ["Host: trivialwar.eastonman.com"])
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
@@ -55,8 +56,7 @@ func _on_data_received():
 	var packet = JSON.parse(data).result
 	data = packet['data']
 	if packet['type'] == GetLeaderBoard:
-		var leaderboard = get_node("/root/Main/RankingPage/LeaderBoard")
-		leaderboard.display(data)
+		emit_signal("backend_leaderboard_callback", data)
 	elif packet['type'] == ReportScore:
 		emit_signal("update_multi_player_score", data)
 	elif packet['type'] == Login:

@@ -79,6 +79,8 @@ margin_right = 1062.0
 margin_bottom = 125.0
 custom_fonts/font = SubResource( 3 )
 
+[node name="ScoreReportTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="getSupply" from="Player" to="MusicController" method="_on_Player_getSupply"]
 [connection signal="hit" from="Player" to="." method="game_over"]
@@ -91,3 +93,4 @@ custom_fonts/font = SubResource( 3 )
 [connection signal="successMusic_Play" from="RankingPage" to="MusicController" method="_on_RankingPage_successMusic_Play"]
 [connection signal="successMusic_Stop" from="RankingPage" to="MusicController" method="_on_RankingPage_successMusic_Stop"]
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
+[connection signal="timeout" from="ScoreReportTimer" to="." method="_on_ScoreReportTimer_timeout"]
