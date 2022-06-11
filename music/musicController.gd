@@ -43,7 +43,7 @@ func _on_BossBgmMusic_finished():
 
 func _on_StartOver_finished():
 	if(startOver_playing == 1):
-		$StartOver.paly()
+		$StartOver.play()
 
 func successMusicPlay():
 	$SuccessMusic.play()
