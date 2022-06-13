@@ -42,17 +42,27 @@ func _on_loginPage_confirmAccount():
 	pass # Replace with function body.
 
 var loginPage_scene = preload("res://loginPage/LoginPage.tscn")
+var loginPage
 func _on_signinPage_signinConfirm():
-	var loginPage = loginPage_scene.instance()
+	loginPage = loginPage_scene.instance()
 	remove_child($SigninPage)
 	add_child(loginPage)
 	loginPage.connect("confirmAccount",self,"_on_loginPage_confirmAccount")
-	loginPage.connect("signinAccount",self,"_on_signinPage_signinConfirm")
+	loginPage.connect("signinAccount",self,"_on_loginPage_signinAccount")
 
 var signinPage_scene = preload("res://signinPage/SigninPage.tscn")
+var signinPage
 func _on_loginPage_signinAccount():
-	var signinPage = signinPage_scene.instance()
+	signinPage = signinPage_scene.instance()
 	add_child(signinPage)
 	signinPage.connect("signinConfirm",self,"_on_signinPage_signinConfirm")
+	signinPage.connect("signinBack",self,"_on_signinPage_signinBack")
 	remove_child($loginPage)
 	pass # Replace with function body.
+
+func _on_signinPage_signinBack():
+	loginPage = loginPage_scene.instance()
+	remove_child($SigninPage)
+	add_child(loginPage)
+	loginPage.connect("confirmAccount",self,"_on_loginPage_confirmAccount")
+	loginPage.connect("signinAccount",self,"_on_loginPage_signinAccount")

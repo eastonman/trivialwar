@@ -1,6 +1,6 @@
 extends CanvasLayer
 signal signinConfirm
-
+signal signinBack
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -26,3 +26,7 @@ func _on_ConfirmButton_pressed():
 	GlobalVar.passWord = $PassWord.text
 	GlobalVar.backend_login()
 	emit_signal("signinConfirm")
+
+
+func _on_BackButton_pressed():
+	emit_signal("signinBack")
