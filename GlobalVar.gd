@@ -29,8 +29,8 @@ const Login = 5
 const Signup = 6
 
 # The URL we will connect to.
-#export var websocket_url = "wss://trivialwar.eastonman.com/socket"
-export var websocket_url = "ws://localhost:8080/socket"
+export var websocket_url = "wss://trivialwar.eastonman.com/socket"
+#export var websocket_url = "ws://localhost:8080/socket"
 
 # Our WebSocketClient instance.
 var _client = WebSocketClient.new()
@@ -42,8 +42,8 @@ func _ready():
 	# Initiate connection to the given URL.
 	_client.connect("connection_established", self, "_connected")
 	_client.connect("data_received", self, "_on_data_received")
-#	var err = _client.connect_to_url(websocket_url, [], false, ["Host: trivialwar.eastonman.com"])
-	var err = _client.connect_to_url(websocket_url)
+	var err = _client.connect_to_url(websocket_url, [], false, ["Host: trivialwar.eastonman.com"])
+#	var err = _client.connect_to_url(websocket_url)
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
