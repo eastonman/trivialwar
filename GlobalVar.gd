@@ -11,6 +11,7 @@ var is_login = false
 # Signals
 signal update_multi_player_score(raw_data)
 signal backend_login_callback(message)
+signal backend_signup_callback(message)
 signal backend_leaderboard_callback(data)
 
 var screen_size
@@ -25,10 +26,11 @@ const StartMultiplayerGame = 2
 const ReportScore = 3
 const GetLeaderBoard = 4
 const Login = 5
-const Bye = 6
+const Signup = 6
 
 # The URL we will connect to.
-export var websocket_url = "wss://trivialwar.eastonman.com/socket"
+#export var websocket_url = "wss://trivialwar.eastonman.com/socket"
+export var websocket_url = "ws://localhost:8080/socket"
 
 # Our WebSocketClient instance.
 var _client = WebSocketClient.new()
@@ -40,7 +42,8 @@ func _ready():
 	# Initiate connection to the given URL.
 	_client.connect("connection_established", self, "_connected")
 	_client.connect("data_received", self, "_on_data_received")
-	var err = _client.connect_to_url(websocket_url, [], false, ["Host: trivialwar.eastonman.com"])
+#	var err = _client.connect_to_url(websocket_url, [], false, ["Host: trivialwar.eastonman.com"])
+	var err = _client.connect_to_url(websocket_url)
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
@@ -61,6 +64,8 @@ func _on_data_received():
 		emit_signal("update_multi_player_score", data)
 	elif packet['type'] == Login:
 		emit_signal("backend_login_callback", data)
+	elif packet['type'] == Signup:
+		emit_signal("backend_signup_callback", data)
 	else:
 		print("Undefined Type")
 	
@@ -73,6 +78,10 @@ func send_message(message):
 func backend_login():
 	var info = {"username": userName, "hash": passWord.sha256_text()}
 	var wsreq = {"type": Login, "param": JSON.print(info)}
+	send_message(JSON.print(wsreq))
+func backend_signup():
+	var info = {"username": userName, "hash": passWord.sha256_text()}
+	var wsreq = {"type": Signup, "param": JSON.print(info)}
 	send_message(JSON.print(wsreq))
 	
 	

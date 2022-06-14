@@ -16,8 +16,6 @@ func login_callback(message: String):
 		emit_signal("confirmAccount")
 	elif message == "denied":
 		print("Login failed")
-		# Close the whole game
-		get_tree().quit()
 	else:
 		print("ERROR: unexpected")
 
