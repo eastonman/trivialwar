@@ -36,6 +36,10 @@ func new_game():
 	if GlobalVar.is_multiplayer_mode:
 		$MultiPlayerScoreLabel.show()
 		$ScoreReportTimer.start(1) # 1sec
+		
+		# Tell backend we have started
+		var wsreq = {'type': GlobalVar.StartMultiplayerGame,'param':'0'}
+		GlobalVar.send_message(JSON.print(wsreq))
 	
 	$Player.start($PlayerStartPosition.position)
 	$MobTimer.start()
@@ -44,9 +48,7 @@ func new_game():
 	get_tree().call_group("mobs","queue_free")
 	get_tree().call_group("props","queue_free")
 	
-	# Tell backend we have started
-	var wsreq = {'type': GlobalVar.StartMultiplayerGame,'param':'0'}
-	GlobalVar.send_message(JSON.print(wsreq))
+	
 	
 func game_over():
 	$Player.multiShootTime = 0
