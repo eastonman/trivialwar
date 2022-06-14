@@ -58,6 +58,7 @@ func _input(event):
 func _on_Player_hit(body):
 	hide()
 	print("Player hit")
+	HP = 0
 	emit_signal("hit")
 	$CollisionPolygon2D.set_deferred("disabled", true)
 
