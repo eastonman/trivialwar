@@ -13,7 +13,7 @@ func _ready():
 
 func backend_callback(message: String):
 	if message == "passed":
-		emit_signal("confirmAccount")
+		emit_signal("signinConfirm")
 	elif message == "denied":
 		print("Login failed")
 	else:
@@ -23,7 +23,7 @@ func _on_ConfirmButton_pressed():
 	GlobalVar.userName = $UserName.text
 	GlobalVar.passWord = $PassWord.text
 	GlobalVar.backend_signup()
-	emit_signal("signinConfirm")
+#	emit_signal("signinConfirm")
 
 
 func _on_BackButton_pressed():
