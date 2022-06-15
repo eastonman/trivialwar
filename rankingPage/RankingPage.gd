@@ -16,6 +16,7 @@ func game_over_entrypoint():
 	emit_signal("successMusic_Play")
 	#$SuccessMusic.playing = 1
 	show_message("GAME OVER")
+	GlobalVar.backend_report_score()
 	var wsreq = {'type': GlobalVar.GetLeaderBoard,'param':'0'}
 	GlobalVar.send_message(JSON.print(wsreq))
 	$LeaderBoard.visible = true
