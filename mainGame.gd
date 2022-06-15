@@ -61,6 +61,9 @@ func game_over():
 	$BulletTimer.stop()
 	get_tree().call_group("boss","queue_free")
 	GlobalVar.have_boss = 0
+	if GlobalVar.is_multiplayer_mode:
+		$ScoreReportTimer.stop()
+		GlobalVar.backend_report_score()
 
 # Load elite scene for later instance
 var elite_scene = preload("res://enemy/Elite.tscn")
@@ -135,8 +138,8 @@ func _on_GlobalVar_update_multi_player_score(raw_data):
 	$MultiPlayerScoreLabel.text = "Rival: "+raw_data
 
 func _on_ScoreReportTimer_timeout():
-	var wsreq = {"type": GlobalVar.ReportScore, "param": str(GlobalVar.score)}
-	GlobalVar.send_message(JSON.print(wsreq))
+	GlobalVar.backend_report_score()
+	
 
 func make_label_top():
 	move_child($LifeLabel,get_child_count())

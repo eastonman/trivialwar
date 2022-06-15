@@ -83,6 +83,9 @@ func backend_signup():
 	var info = {"username": userName, "hash": passWord.sha256_text()}
 	var wsreq = {"type": Signup, "param": JSON.print(info)}
 	send_message(JSON.print(wsreq))
+func backend_report_score():
+	var wsreq = {"type": GlobalVar.ReportScore, "param": str(GlobalVar.score)}
+	send_message(JSON.print(wsreq))
 	
 	
 func _process(delta):
