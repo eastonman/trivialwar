@@ -132,6 +132,8 @@ func back_home():
 	$FirstPage/HardButton.show()
 	$FirstPage._ready()
 	get_tree().call_group("mobs","queue_free")
+	if GlobalVar.is_multiplayer_mode:
+		$MultiPlayerScoreLabel.visible = false
 
 
 func _on_GlobalVar_update_multi_player_score(raw_data):
