@@ -33,9 +33,10 @@ func new_game():
 	# Init HUD display
 	$ScoreLabel.show()
 	$LifeLabel.show()
+	$ScoreReportTimer.start(1) # 1sec
 	if GlobalVar.is_multiplayer_mode:
 		$MultiPlayerScoreLabel.show()
-		$ScoreReportTimer.start(1) # 1sec
+		
 		
 		# Tell backend we have started
 		var wsreq = {'type': GlobalVar.StartMultiplayerGame,'param':'0'}
@@ -61,8 +62,8 @@ func game_over():
 	$BulletTimer.stop()
 	get_tree().call_group("boss","queue_free")
 	GlobalVar.have_boss = 0
+	$ScoreReportTimer.stop()
 	if GlobalVar.is_multiplayer_mode:
-		$ScoreReportTimer.stop()
 		GlobalVar.backend_report_score()
 
 # Load elite scene for later instance
